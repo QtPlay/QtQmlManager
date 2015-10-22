@@ -9,13 +9,21 @@ HunterGate(
 )
 project(Example)
 
+option(TEST_EXTERNAL "Test Hunter's external module instead of local file" OFF)
+
 hunter_add_package(Qt)
 
 set(qml_dir "${CMAKE_CURRENT_BINARY_DIR}/qml")
 file(REMOVE_RECURSE "${qml_dir}")
 set(expected_file "${qml_dir}/QtMultimedia/Video.qml")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
+if(TEST_EXTERNAL)
+  hunter_add_package(QtQmlManager)
+  list(APPEND CMAKE_MODULE_PATH "${QTQMLMANAGER_ROOT}/cmake")
+else()
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
+endif()
+
 include(QtCopyQmlTo)
 
 if(EXISTS "${expected_file}")
