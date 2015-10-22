@@ -22,7 +22,6 @@ function(QtCopyQmlTo directory)
     )
   endif()
 
-  file(REMOVE_RECURSE "${directory}")
   file(MAKE_DIRECTORY "${directory}")
 
   file(GLOB_RECURSE qml_list RELATIVE "${QT_ROOT}/qml" "${QT_ROOT}/qml/*")

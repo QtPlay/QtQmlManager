@@ -12,6 +12,7 @@ project(Example)
 hunter_add_package(Qt)
 
 set(qml_dir "${CMAKE_CURRENT_BINARY_DIR}/qml")
+file(REMOVE_RECURSE "${qml_dir}")
 set(expected_file "${qml_dir}/QtMultimedia/Video.qml")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
